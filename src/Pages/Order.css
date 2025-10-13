@@ -1,0 +1,31 @@
+.order-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.order-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.order-items {
+  margin-top: 10px;
+}
+
+.cancel-btn {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cancel-btn:hover {
+  background-color: #e60000;
+}
