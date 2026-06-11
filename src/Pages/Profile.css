@@ -1,30 +1,101 @@
 .profile-container {
-  height: 100vh;
-  background: linear-gradient(135deg, #5c6bc0, #8e24aa);
-  display: flex;
-  justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #f7f8fb, #d8e6e7);
+  display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
 }
 
 .profile-card {
-  background-color: #ffffffcc;
-  border-radius: 15px;
-  padding: 40px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  text-align: left;
-  width: 320px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(20, 35, 42, 0.14);
   color: #333;
+  padding: 32px;
+  text-align: left;
+  width: min(420px, 100%);
+}
+
+.profile-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .profile-card h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #4a148c;
+  color: #1e3036;
+  font-size: 28px;
+  margin: 0;
 }
 
 .profile-info p {
   font-size: 16px;
-  margin-bottom: 10px;
   line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.profile-edit-btn,
+.profile-form button {
+  background-color: #1f2d35;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 16px;
+}
+
+.profile-edit-btn:hover,
+.profile-form button:hover {
+  background-color: #334650;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-form label {
+  color: #334650;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 6px;
+}
+
+.profile-form input {
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 10px 12px;
+}
+
+.profile-form input:focus {
+  border-color: #317c84;
+  outline: none;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.profile-form .profile-cancel-btn {
+  background-color: #e8eef0;
+  color: #1f2d35;
+}
+
+.profile-form .profile-cancel-btn:hover {
+  background-color: #d8e1e4;
+}
+
+.profile-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }

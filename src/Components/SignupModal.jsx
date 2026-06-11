@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { signupUser } from "../services/userService";
+import { GoogleLogin } from "@react-oauth/google";
+import { googleLoginUser, signupUser } from "../services/userService";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Modal.css";
 
 const SignupModal = ({ closeModal, openLoginModal }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,6 +29,18 @@ const SignupModal = ({ closeModal, openLoginModal }) => {
       openLoginModal();
     } catch (error) {
       toast.error(error.response?.data?.msg || "Signup Failed");
+    }
+  };
+
+  const handleGoogleSuccess = async ({ credential }) => {
+    try {
+      const res = await googleLoginUser(credential);
+      toast.success(res.data.msg);
+      localStorage.setItem("token", res.data.token);
+      closeModal();
+      navigate("/");
+    } catch (error) {
+      toast.error(error.response?.data?.msg || "Google Signup Failed");
     }
   };
 
@@ -87,6 +102,19 @@ const SignupModal = ({ closeModal, openLoginModal }) => {
           />
           <button type="submit">Signup</button>
         </form>
+        {import.meta.env.VITE_GOOGLE_CLIENT_ID && (
+          <>
+            <div className="auth-divider">or</div>
+            <div className="google-login-wrapper">
+              <GoogleLogin
+                text="signup_with"
+                onSuccess={handleGoogleSuccess}
+                onError={() => toast.error("Google Signup Failed")}
+                width="320"
+              />
+            </div>
+          </>
+        )}
 
         <p className="auth-switch-text">
           Already have an account?{" "}

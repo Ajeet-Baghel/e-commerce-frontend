@@ -47,6 +47,29 @@
   background-color: #555;
 }
 
+.auth-divider {
+  align-items: center;
+  color: #666;
+  display: flex;
+  font-size: 13px;
+  gap: 12px;
+  margin: 16px 0;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  background: #ddd;
+  content: "";
+  flex: 1;
+  height: 1px;
+}
+
+.google-login-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .auth-close-button {
   position: absolute;
   right: 15px;
