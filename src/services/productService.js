@@ -35,3 +35,11 @@ export const updateProduct = async (productId, updatedData) => {
     },
   });
 };
+
+export const generateProductContent = async (productData) => {
+  return axios.post("/ai/product-content", productData, {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+};

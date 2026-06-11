@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { loginUser } from "../services/userService";
+import { GoogleLogin } from "@react-oauth/google";
+import { googleLoginUser, loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +30,19 @@ const LoginModal = ({ closeModal, openSignupModal }) => {
       toast.error(error.response?.data?.msg || "Login Failed");
     }
   };
+
+  const handleGoogleSuccess = async ({ credential }) => {
+    try {
+      const res = await googleLoginUser(credential);
+      toast.success(res.data.msg);
+      localStorage.setItem("token", res.data.token);
+      closeModal();
+      navigate("/");
+    } catch (error) {
+      toast.error(error.response?.data?.msg || "Google Login Failed");
+    }
+  };
+
   return (
     <div className="auth-modal-overlay">
       <div className="auth-modal-content">
@@ -53,6 +67,18 @@ const LoginModal = ({ closeModal, openSignupModal }) => {
           />
           <button type="submit">Login</button>
         </form>
+        {import.meta.env.VITE_GOOGLE_CLIENT_ID && (
+          <>
+            <div className="auth-divider">or</div>
+            <div className="google-login-wrapper">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => toast.error("Google Login Failed")}
+                width="320"
+              />
+            </div>
+          </>
+        )}
 
         <p className="auth-switch-text">
           Don't have an account?{" "}
